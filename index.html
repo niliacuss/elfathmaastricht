@@ -8,25 +8,40 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Geometrisch islamitisch patroon als SVG data URL */
+.patroon-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%232e7d52' stroke-width='0.5' opacity='0.12'%3E%3Cpolygon points='40,4 56,16 56,40 40,52 24,40 24,16'/%3E%3Cpolygon points='40,12 52,20 52,38 40,46 28,38 28,20'/%3E%3Cline x1='40' y1='4' x2='40' y2='52'/%3E%3Cline x1='24' y1='16' x2='56' y2='40'/%3E%3Cline x1='56' y1='16' x2='24' y2='40'/%3E%3Ccircle cx='40' cy='28' r='6'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.patroon-bg-licht {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%232e7d52' stroke-width='0.4' opacity='0.08'%3E%3Cpolygon points='30,3 42,12 42,30 30,39 18,30 18,12'/%3E%3Ccircle cx='30' cy='21' r='5'/%3E%3Cline x1='30' y1='3' x2='30' y2='39'/%3E%3Cline x1='18' y1='12' x2='42' y2='30'/%3E%3Cline x1='42' y1='12' x2='18' y2='30'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.patroon-groen {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.5' opacity='0.08'%3E%3Cpolygon points='40,4 56,16 56,40 40,52 24,40 24,16'/%3E%3Cpolygon points='40,12 52,20 52,38 40,46 28,38 28,20'/%3E%3Cline x1='40' y1='4' x2='40' y2='52'/%3E%3Cline x1='24' y1='16' x2='56' y2='40'/%3E%3Cline x1='56' y1='16' x2='24' y2='40'/%3E%3Ccircle cx='40' cy='28' r='6'/%3E%3C/g%3E%3C/svg%3E");
+}
+
 :root {
   --groen:       #2e7d52;
   --groen-diep:  #1b5c3a;
-  --groen-licht: #e8f5ee;
-  --groen-mint:  #d1edd9;
+  --groen-licht: #e4f2ea;
+  --groen-mint:  #c8e6d4;
   --wit:         #ffffff;
-  --lichtgrijs:  #f4f4f2;
-  --rand:        #e2e2dc;
-  --tekst:       #111111;
-  --tekst-mid:   #444444;
-  --tekst-zacht: #888888;
-  --accent:      #e8a020;
+  --lichtgrijs:  #f5f2ec;
+  --warm:        #faf7f0;
+  --rand:        #ddd8cc;
+  --tekst:       #1a1510;
+  --tekst-mid:   #4a4540;
+  --tekst-zacht: #8a8580;
+  --accent:      #c8900a;
+  --accent-licht:#f5e4c0;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Space Grotesk', sans-serif;
-  background: var(--wit);
+  background: var(--warm);
   color: var(--tekst);
   line-height: 1.6;
 }
@@ -36,8 +51,9 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: var(--wit);
+  background: rgba(255,255,255,0.97);
   border-bottom: 1px solid var(--rand);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
   height: 64px;
   display: flex;
   align-items: center;
@@ -55,8 +71,9 @@ nav {
 .logo-box {
   width: 36px;
   height: 36px;
-  background: var(--groen);
+  background: linear-gradient(135deg, var(--groen) 0%, var(--groen-diep) 100%);
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(46,125,82,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -108,7 +125,8 @@ nav {
 }
 
 .nav-doneer-knop {
-  background: var(--groen) !important;
+  background: linear-gradient(135deg, var(--groen) 0%, var(--groen-diep) 100%) !important;
+  box-shadow: 0 2px 8px rgba(46,125,82,0.3) !important;
   color: var(--wit) !important;
   border-radius: 8px !important;
   padding: 0.45rem 1rem !important;
@@ -240,7 +258,8 @@ nav {
 .knop-outline:hover { border-color: rgba(255,255,255,0.5); }
 
 .hero-rechts {
-  background: var(--lichtgrijs);
+  background: var(--warm);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='none' stroke='%232e7d52' stroke-width='0.5' opacity='0.06'%3E%3Cpolygon points='40,4 56,16 56,40 40,52 24,40 24,16'/%3E%3Ccircle cx='40' cy='28' r='6'/%3E%3C/g%3E%3C/svg%3E");
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -252,12 +271,13 @@ nav {
 
 /* Gebedstijden in hero rechts */
 .gebed-kaart {
-  background: var(--wit);
+  background: var(--warm);
   border-radius: 16px;
   padding: 2rem;
   width: 100%;
   max-width: 380px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  border: 1px solid var(--rand);
   position: relative;
   z-index: 1;
 }
@@ -286,10 +306,13 @@ nav {
   transition: background 0.15s;
 }
 
-.gebed-rij:hover { background: var(--lichtgrijs); }
+.gebed-rij:hover { background: var(--groen-licht); border-radius: 6px; }
 
 .gebed-rij.actief {
   background: var(--groen-licht);
+  border-radius: 8px;
+  border-left: 3px solid var(--groen);
+  padding-left: calc(0.85rem - 3px);
 }
 
 .gebed-naam {
@@ -322,8 +345,9 @@ nav {
 .gebed-jumua {
   margin-top: 1rem;
   padding: 0.75rem 0.85rem;
-  background: var(--groen);
+  background: linear-gradient(135deg, var(--groen) 0%, var(--groen-diep) 100%);
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(46,125,82,0.25);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -347,8 +371,9 @@ nav {
 
 /* INFO STRIP */
 .info-strip {
-  background: var(--tekst);
+  background: linear-gradient(90deg, #1a1510 0%, #2a2018 50%, #1a1510 100%);
   padding: 1rem 2.5rem;
+  border-top: 2px solid var(--groen);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -395,9 +420,11 @@ nav {
 }
 
 .over-stat {
-  background: var(--lichtgrijs);
+  background: var(--warm);
   border-radius: 12px;
   padding: 1.5rem;
+  border: 1px solid var(--rand);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .over-stat-num {
@@ -428,16 +455,19 @@ nav {
 .over-stat.groot .over-stat-lbl { color: rgba(255,255,255,0.7); }
 
 .sectie-chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   background: var(--groen-licht);
   color: var(--groen-diep);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.3rem 0.75rem;
+  padding: 0.3rem 0.85rem;
   border-radius: 100px;
   margin-bottom: 1rem;
+  border: 1px solid var(--groen-mint);
 }
 
 .sectie-kop {
@@ -447,6 +477,17 @@ nav {
   color: var(--tekst);
   line-height: 1.15;
   margin-bottom: 1rem;
+  position: relative;
+}
+
+.sectie-kop::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--groen) 0%, var(--groen-mint) 100%);
+  border-radius: 2px;
+  margin-top: 0.75rem;
 }
 
 .sectie-tekst {
@@ -460,6 +501,7 @@ nav {
 .activiteiten {
   padding: 6rem 2.5rem;
   background: var(--wit);
+  border-top: 3px solid var(--groen-mint);
 }
 
 .act-inner {
@@ -485,20 +527,22 @@ nav {
   border-radius: 12px;
   padding: 1.75rem;
   transition: all 0.2s;
-  border: 1.5px solid transparent;
+  border: 1px solid var(--rand);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .act-kaart:hover {
-  border-color: var(--groen-mint);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(46,125,82,0.1);
+  border-color: var(--groen);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(46,125,82,0.12);
 }
 
 .act-icoon {
-  width: 44px;
-  height: 44px;
-  background: var(--groen-licht);
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--groen-licht) 0%, var(--groen-mint) 100%);
+  border-radius: 12px;
+  border: 1px solid var(--groen-mint);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -525,6 +569,7 @@ nav {
 .aankondigingen {
   padding: 6rem 2.5rem;
   background: var(--lichtgrijs);
+  border-top: 3px solid var(--groen-mint);
 }
 
 .aankondigingen-inner {
@@ -537,13 +582,14 @@ nav {
   flex-direction: column;
   gap: 1px;
   background: var(--rand);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   margin-top: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
 .aankondiging-item {
-  background: var(--wit);
+  background: var(--warm);
   padding: 1.5rem 2rem;
   display: grid;
   grid-template-columns: 80px 1fr auto;
@@ -553,7 +599,7 @@ nav {
   text-decoration: none;
 }
 
-.aankondiging-item:hover { background: var(--lichtgrijs); }
+.aankondiging-item:hover { background: var(--groen-licht); }
 
 .aankondiging-dag {
   text-align: center;
@@ -602,7 +648,7 @@ nav {
 /* DONEER */
 .doneer {
   padding: 6rem 2.5rem;
-  background: var(--groen);
+  background: linear-gradient(135deg, var(--groen-diep) 0%, var(--groen) 60%, #3a9460 100%);
   position: relative;
   overflow: hidden;
 }
@@ -703,8 +749,9 @@ nav {
 
 .doneer-submit {
   width: 100%;
-  background: var(--groen);
+  background: linear-gradient(135deg, var(--groen) 0%, var(--groen-diep) 100%);
   color: var(--wit);
+  box-shadow: 0 4px 12px rgba(46,125,82,0.3);
   border: none;
   border-radius: 10px;
   padding: 0.9rem;
@@ -764,7 +811,8 @@ nav {
 
 .contact-groot {
   grid-column: 1 / -1;
-  background: var(--tekst);
+  background: linear-gradient(135deg, #1a1510 0%, #2a2018 100%);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -802,8 +850,8 @@ nav {
 
 /* FOOTER */
 footer {
-  background: var(--wit);
-  border-top: 1px solid var(--rand);
+  background: var(--warm);
+  border-top: 2px solid var(--groen-mint);
   padding: 2rem 2.5rem;
   display: flex;
   align-items: center;
@@ -926,7 +974,7 @@ footer {
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-links">
+  <div class="hero-links patroon-groen">
     
     <div class="hero-tag">Maastricht, Sint Lucassingel 70</div>
     <h1>Welkom bij<br>Moskee<br><span>El Fath</span></h1>
@@ -1016,7 +1064,7 @@ footer {
 
 
 <!-- GEBEDSKALENDER -->
-<section style="background: var(--wit); padding: 4rem 2.5rem;">
+<section style="background: var(--warm); padding: 4rem 2.5rem; border-top: 3px solid var(--groen-mint);">
   <div style="max-width: 1100px; margin: 0 auto;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
       <div>
@@ -1037,7 +1085,7 @@ footer {
 </section>
 
 <!-- FOTO SECTIE - Gebedsruimte -->
-<section style="padding: 0; background: var(--wit); overflow: hidden;">
+<section style="padding: 0; background: var(--wit); overflow: hidden; border-top: 3px solid var(--groen-mint);">
   <div style="max-width: 1100px; margin: 0 auto; padding: 5rem 2.5rem;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
       <div>
@@ -1062,7 +1110,7 @@ footer {
 </section>
 
 <!-- OVER -->
-<section class="over" id="over" style="background: var(--lichtgrijs);">
+<section class="over" id="over" style="background: var(--lichtgrijs); border-top: 3px solid var(--groen-mint);">
   <div class="over-inner">
     <div>
       <span class="sectie-chip">Over ons</span>
