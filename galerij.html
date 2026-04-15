@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerij & Activiteiten — Moskee El Fath Maastricht</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --groen:       #2e7d52;
+  --groen-diep:  #1b5c3a;
+  --groen-licht: #e8f5ee;
+  --groen-mint:  #d1edd9;
+  --wit:         #ffffff;
+  --lichtgrijs:  #f4f4f2;
+  --rand:        #e2e2dc;
+  --tekst:       #111111;
+  --tekst-mid:   #444444;
+  --tekst-zacht: #888888;
+  --accent:      #e8a020;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--wit);
+  color: var(--tekst);
+  line-height: 1.6;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--wit);
+  border-bottom: 1px solid var(--rand);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 2.5rem;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.logo-box {
+  width: 36px;
+  height: 36px;
+  background: var(--groen);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-box svg { width: 20px; height: 20px; }
+
+.logo-naam strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--tekst);
+}
+
+.logo-naam span {
+  display: block;
+  font-size: 0.62rem;
+  color: var(--tekst-zacht);
+  margin-top: 1px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--tekst-mid);
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+
+.nav-menu a:hover { background: var(--lichtgrijs); color: var(--tekst); }
+.nav-menu a.actief { background: var(--groen-licht); color: var(--groen-diep); }
+
+.nav-doneer-knop {
+  background: var(--groen) !important;
+  color: var(--wit) !important;
+  border-radius: 8px !important;
+}
+
+/* HERO GALERIJ */
+.galerij-hero {
+  padding: 8rem 2.5rem 4rem;
+  background: var(--lichtgrijs);
+  position: relative;
+  overflow: hidden;
+}
+
+.galerij-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40%;
+  height: 100%;
+  background: var(--groen-licht);
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.galerij-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.sectie-chip {
+  display: inline-block;
+  background: var(--groen-licht);
+  color: var(--groen-diep);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.galerij-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--tekst);
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+.galerij-hero p {
+  font-size: 1rem;
+  color: var(--tekst-mid);
+  max-width: 500px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* FILTER TABS */
+.filter-balk {
+  background: var(--wit);
+  border-bottom: 1px solid var(--rand);
+  padding: 0 2.5rem;
+  position: sticky;
+  top: 64px;
+  z-index: 50;
+}
+
+.filter-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.filter-tab {
+  padding: 1rem 1.25rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--tekst-zacht);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+  white-space: nowrap;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.filter-tab:hover { color: var(--tekst); }
+.filter-tab.actief {
+  color: var(--groen-diep);
+  border-bottom-color: var(--groen);
+}
+
+/* UITGELICHTE FOTO */
+.uitgelicht {
+  padding: 4rem 2.5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.uitgelicht-kaart {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  height: 500px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+.uitgelicht-kaart img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.uitgelicht-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  padding: 3rem 2.5rem 2rem;
+}
+
+.uitgelicht-tag {
+  display: inline-block;
+  background: var(--groen);
+  color: var(--wit);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 100px;
+  margin-bottom: 0.75rem;
+}
+
+.uitgelicht-overlay h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--wit);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.uitgelicht-overlay p {
+  color: rgba(255,255,255,0.75);
+  font-size: 0.88rem;
+  font-weight: 300;
+}
+
+/* FOTO GRID */
+.foto-sectie {
+  padding: 2rem 2.5rem 5rem;
+}
+
+.foto-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.foto-sectie-titel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tekst-zacht);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rand);
+}
+
+.foto-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.foto-kaart {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: var(--lichtgrijs);
+  cursor: pointer;
+}
+
+.foto-kaart:hover .foto-overlay { opacity: 1; }
+.foto-kaart:hover img { transform: scale(1.03); }
+
+.foto-kaart img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.foto-kaart.groot img { height: 320px; }
+
+.foto-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(46,125,82,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.foto-overlay span {
+  color: var(--wit);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.foto-label {
+  padding: 0.75rem;
+  background: var(--wit);
+  border-top: 1px solid var(--rand);
+}
+
+.foto-label strong {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--tekst);
+  margin-bottom: 0.15rem;
+}
+
+.foto-label span {
+  font-size: 0.72rem;
+  color: var(--tekst-zacht);
+}
+
+/* PLACEHOLDER FOTO styling */
+.foto-placeholder {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(135deg, var(--groen-licht) 0%, var(--groen-mint) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.foto-placeholder.groot { height: 320px; }
+
+.foto-placeholder svg {
+  width: 40px;
+  height: 40px;
+  opacity: 0.4;
+}
+
+.foto-placeholder span {
+  font-size: 0.75rem;
+  color: var(--groen-diep);
+  opacity: 0.6;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* ACTIVITEITEN SECTIE */
+.activiteiten-sectie {
+  background: var(--lichtgrijs);
+  padding: 5rem 2.5rem;
+}
+
+.activiteiten-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.act-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--rand);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.act-item {
+  background: var(--wit);
+  padding: 1.75rem 2rem;
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.act-datum {
+  text-align: center;
+}
+
+.act-datum strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--groen);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.act-datum span {
+  font-size: 0.72rem;
+  color: var(--tekst-zacht);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.act-info h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--tekst);
+  margin-bottom: 0.25rem;
+}
+
+.act-info p {
+  font-size: 0.82rem;
+  color: var(--tekst-mid);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.act-badge {
+  background: var(--groen-licht);
+  color: var(--groen-diep);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* SOCIALS SECTIE */
+.socials-sectie {
+  padding: 5rem 2.5rem;
+  background: var(--wit);
+  text-align: center;
+}
+
+.socials-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.socials-inner h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--tekst);
+  margin-bottom: 0.75rem;
+}
+
+.socials-inner p {
+  font-size: 0.92rem;
+  color: var(--tekst-mid);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.socials-knoppen {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-knop {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.social-facebook {
+  background: #1877f2;
+  color: var(--wit);
+}
+
+.social-facebook:hover { background: #1660cc; }
+
+.social-instagram {
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: var(--wit);
+}
+
+.social-instagram:hover { opacity: 0.9; }
+
+/* FOOTER */
+footer {
+  background: var(--wit);
+  border-top: 1px solid var(--rand);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.footer-logo-box {
+  width: 28px;
+  height: 28px;
+  background: var(--groen);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-logo-box svg { width: 16px; height: 16px; }
+.footer-naam { font-size: 0.85rem; font-weight: 600; color: var(--tekst); }
+
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-size: 0.8rem;
+  color: var(--tekst-zacht);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--tekst); }
+.footer-copy { font-size: 0.78rem; color: var(--tekst-zacht); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.25rem; }
+  .nav-menu { display: none; }
+  .galerij-hero, .foto-sectie, .activiteiten-sectie, .socials-sectie { padding: 3rem 1.5rem; }
+  .galerij-hero { padding-top: 6rem; }
+  .foto-grid { grid-template-columns: 1fr 1fr; }
+  .act-item { grid-template-columns: 60px 1fr; }
+  .act-badge { display: none; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 560px) {
+  .foto-grid { grid-template-columns: 1fr; }
+  .uitgelicht-kaart { height: 300px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-box">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8.5" y="2" width="3" height="12" rx="1.5" fill="white"/>
+        <ellipse cx="10" cy="2.5" rx="3.5" ry="2.5" fill="white"/>
+        <rect x="4" y="13" width="12" height="5" rx="1" fill="white"/>
+        <circle cx="10" cy="1" r="1" fill="white"/>
+      </svg>
+    </div>
+    <div class="logo-naam">
+      <strong>El Fath</strong>
+      <span>Moskee Maastricht</span>
+    </div>
+  </a>
+  <ul class="nav-menu">
+    <li><a href="index.html#over">Over ons</a></li>
+    <li><a href="index.html#activiteiten">Activiteiten</a></li>
+    <li><a href="galerij.html" class="actief">Galerij</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.html#doneer" class="nav-doneer-knop">Doneer</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="galerij-hero">
+  <div class="galerij-hero-inner">
+    <span class="sectie-chip">Fotogalerij</span>
+    <h1>Activiteiten &<br>Impressies</h1>
+    <p>Een kijkje achter de deuren van Moskee El Fath. Van gebedsmomenten tot lezingen, gemeenschapsactiviteiten en speciale gelegenheden.</p>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-balk">
+  <div class="filter-inner">
+    <button class="filter-tab actief">Alles</button>
+    <button class="filter-tab">Gebedsruimte</button>
+    <button class="filter-tab">Lezingen</button>
+    <button class="filter-tab">Gemeenschap</button>
+    <button class="filter-tab">Ramadan</button>
+    <button class="filter-tab">Jongeren</button>
+  </div>
+</div>
+
+<!-- UITGELICHTE FOTO -->
+<div class="uitgelicht">
+  <div class="uitgelicht-kaart">
+    <img src="gebedsruimte.jpg" alt="Gebedsruimte Moskee El Fath">
+    <div class="uitgelicht-overlay">
+      <div class="uitgelicht-tag">Uitgelicht</div>
+      <h2>Onze gerenoveerde gebedsruimte</h2>
+      <p>Prachtig houtsnijwerk en islamitische ornamentiek — een serene plek voor dagelijkse gebeden</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOTO GRID -->
+<section class="foto-sectie">
+  <div class="foto-inner">
+
+    <div class="foto-sectie-titel">Gebedsruimte & Moskee</div>
+    <div class="foto-grid">
+      <div class="foto-kaart groot">
+        <img src="gebedsruimte.jpg" alt="Mihrab en minbar">
+        <div class="foto-overlay"><span>Mihrab en minbar — prachtig houtsnijwerk</span></div>
+        <div class="foto-label">
+          <strong>Mihrab & Minbar</strong>
+          <span>Gebedsruimte El Fath</span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1rem;">
+        <div class="foto-kaart">
+          <div class="foto-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+              <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+              <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Voeg foto toe vanuit Facebook of Instagram</span>
+          </div>
+          <div class="foto-label">
+            <strong>Gebedsruimte</strong>
+            <span>Foto toe te voegen</span>
+          </div>
+        </div>
+        <div class="foto-kaart">
+          <div class="foto-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+              <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+              <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Voeg foto toe vanuit Facebook of Instagram</span>
+          </div>
+          <div class="foto-label">
+            <strong>Buitenkant moskee</strong>
+            <span>Foto toe te voegen</span>
+          </div>
+        </div>
+      </div>
+      <div class="foto-kaart">
+        <div class="foto-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Voeg foto toe vanuit Facebook of Instagram</span>
+        </div>
+        <div class="foto-label">
+          <strong>Ingang & Hal</strong>
+          <span>Foto toe te voegen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="foto-sectie-titel">Lezingen & Activiteiten</div>
+    <div class="foto-grid">
+      <div class="foto-kaart">
+        <div class="foto-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Voeg foto toe vanuit Facebook of Instagram</span>
+        </div>
+        <div class="foto-label">
+          <strong>Lezing in de moskee</strong>
+          <span>Foto toe te voegen</span>
+        </div>
+      </div>
+      <div class="foto-kaart">
+        <div class="foto-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Voeg foto toe vanuit Facebook of Instagram</span>
+        </div>
+        <div class="foto-label">
+          <strong>Koranles kinderen</strong>
+          <span>Foto toe te voegen</span>
+        </div>
+      </div>
+      <div class="foto-kaart">
+        <div class="foto-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Voeg foto toe vanuit Facebook of Instagram</span>
+        </div>
+        <div class="foto-label">
+          <strong>Gemeenschapsactiviteit</strong>
+          <span>Foto toe te voegen</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="foto-sectie-titel">Ramadan & Bijzondere Gelegenheden</div>
+    <div class="foto-grid">
+      <div class="foto-kaart">
+        <div class="foto-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Voeg foto toe vanuit Facebook of Instagram</span>
+        </div>
+        <div class="foto-label">
+          <strong>Ramadan iftar</strong>
+          <span>Foto toe te voegen</span>
+        </div>
+      </div>
+      <div class="foto-kaart">
+        <div class="foto-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Voeg foto toe vanuit Facebook of Instagram</span>
+        </div>
+        <div class="foto-label">
+          <strong>Eid viering</strong>
+          <span>Foto toe te voegen</span>
+        </div>
+      </div>
+      <div class="foto-kaart">
+        <div class="foto-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="#2e7d52" stroke-width="1.5"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#2e7d52" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#2e7d52" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Voeg foto toe vanuit Facebook of Instagram</span>
+        </div>
+        <div class="foto-label">
+          <strong>Open dag</strong>
+          <span>Foto toe te voegen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITEITEN LIJST -->
+<section class="activiteiten-sectie">
+  <div class="activiteiten-inner">
+    <span class="sectie-chip">Agenda</span>
+    <h2 style="font-size:clamp(1.8rem,3vw,2.4rem); font-weight:700; letter-spacing:-0.03em; color:var(--tekst); line-height:1.15; margin-bottom:0.5rem;">Aankomende activiteiten</h2>
+    <div class="act-lijst">
+      <div class="act-item">
+        <div class="act-datum">
+          <strong>18</strong>
+          <span>Apr</span>
+        </div>
+        <div class="act-info">
+          <h3>Lezing na het Maghribgebed</h3>
+          <p>Wekelijkse lezing voor broeders en zusters. Iedereen welkom — geen aanmelding vereist.</p>
+        </div>
+        <span class="act-badge">Wekelijks</span>
+      </div>
+      <div class="act-item">
+        <div class="act-datum">
+          <strong>19</strong>
+          <span>Apr</span>
+        </div>
+        <div class="act-info">
+          <h3>Koranles kinderen</h3>
+          <p>Elke zaterdag van 10:00 tot 12:00 voor kinderen van 6 tot 14 jaar. Aanmelden via de moskee.</p>
+        </div>
+        <span class="act-badge">Wekelijks</span>
+      </div>
+      <div class="act-item">
+        <div class="act-datum">
+          <strong>25</strong>
+          <span>Apr</span>
+        </div>
+        <div class="act-info">
+          <h3>Vrijdaggebed met gastspreker</h3>
+          <p>Uitgebreid vrijdaggebed met speciale gastspreker. Aanvang 13:15, khutba met Nederlandse vertaling.</p>
+        </div>
+        <span class="act-badge">Eenmalig</span>
+      </div>
+      <div class="act-item">
+        <div class="act-datum">
+          <strong>02</strong>
+          <span>Mei</span>
+        </div>
+        <div class="act-info">
+          <h3>Open Dag Moskee El Fath</h3>
+          <p>Jaarlijkse open dag voor de buurt en geinteresseerden. Rondleiding, vragen stellen en samen eten. 10:00 tot 16:00.</p>
+        </div>
+        <span class="act-badge">Eenmalig</span>
+      </div>
+      <div class="act-item">
+        <div class="act-datum">
+          <strong>10</strong>
+          <span>Mei</span>
+        </div>
+        <div class="act-info">
+          <h3>Islamitische quiz voor jongeren</h3>
+          <p>Leuke en leerzame quiz voor jongeren van 12 tot 18 jaar. Prijzen te winnen.</p>
+        </div>
+        <span class="act-badge">Eenmalig</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIALS -->
+<section class="socials-sectie">
+  <div class="socials-inner">
+    <span class="sectie-chip">Volg ons</span>
+    <h2>Meer foto's en updates op onze socials</h2>
+    <p>Volg ons op Facebook en Instagram voor de laatste aankondigingen, foto's van activiteiten en updates van Moskee El Fath Maastricht.</p>
+    <div class="socials-knoppen">
+      <a href="https://www.facebook.com/elfathmaastricht/" class="social-knop social-facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/explore/locations/1032036794/moskee-el-fath-maastricht/" class="social-knop social-instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="index.html" class="footer-logo-wrap">
+    <div class="footer-logo-box">
+      <svg viewBox="0 0 16 16" fill="none"><rect x="6.5" y="1.5" width="3" height="9" rx="1.5" fill="white"/><ellipse cx="8" cy="2" rx="3" ry="2" fill="white"/><rect x="2" y="10" width="12" height="4.5" rx="1" fill="white"/><circle cx="8" cy=".75" r=".75" fill="white"/></svg>
+    </div>
+    <span class="footer-naam">Moskee El Fath Maastricht</span>
+  </a>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#activiteiten">Activiteiten</a>
+    <a href="galerij.html">Galerij</a>
+    <a href="index.html#doneer">Doneer</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <span class="footer-copy">Sint Lucassingel 70, Maastricht</span>
+</footer>
+
+<script>
+document.querySelectorAll('.filter-tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('actief'));
+    this.classList.add('actief');
+  });
+});
+</script>
+
+</body>
+</html>
